@@ -1,0 +1,118 @@
+﻿@model NotesMarketPlace.Models.tbl_Users
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Meta tags  -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Title -->
+    <title>Login | Notes-MarketPlace</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/User/images/logo/favicon.ico">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/Content/User/css/bootstrap/bootstrap.min.css">
+
+    <!-- Customized css -->
+    <link rel="stylesheet" href="~/Content/User/css/style.css">
+
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+</head>
+
+<body>
+    <!-- Background Banner -->
+    <img class="bg-img" src="~/Content/User/images/login/banner-with-overlay.jpg" alt="Library">
+
+    <!-- Login Box -->
+    <section id="login">
+        <div class="container">
+
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div class="main-logo">
+                        <a href="~/User/index"><img class="img-fluid" src="~/Content/User/images/login/top-logo.png" alt="Notes MarketPlace Logo"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="login-box">
+
+                        <p class="section-heading">Login</p>
+
+                        <p class="user-instruction">Enter your email address and password to login</p>
+
+                        <form action="login" method="post">
+
+                            @TempData["Message"]
+
+                            <div class="form-group">
+                                <label class="info-label" for="emailaddress">Email</label>
+                                @Html.TextBoxFor(x => x.Email_id, new { @class = "form-control input-box-style", @id = "emailaddress", @placeholder = "Enter your email" })
+                                @Html.ValidationMessage("Email", new { @style = "color:red" })
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="info-label" for="password">Password</label>
+
+                                <div class="forgot-password-label-box">
+                                    <label><a class="forgot-password-label" href="~/User/forgot">Forgot Password?</a></label>
+                                </div>
+
+                                @Html.PasswordFor(x => x.Password, new { @type = "password", @class = "form-control input-box-style", @id = "password", @placeholder = "Enter your password" })
+                                <div class="eye"><img class="eye-img" src="~/Content/User/images/login/eye.png" alt="eye"></div>
+
+                                <div class="incorrect-password-label">
+                                    @Html.Raw(@ViewBag.log)
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label id="remember-me-label" class="form-check-label" for="exampleCheck1">Remember Me</label>
+                            </div>
+
+                            <div class="form-btn">
+                                <button type="submit" class="btn btn-general btn-purple">Login</button>
+                            </div>
+
+                        </form>
+
+                        <div class="toggle-btw-login-signup">
+                            <p>Don't have an account? <span><a href="~/User/signup">Sign Up</a></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Login Box Ends -->
+
+    <!-- Java-scripts -->
+
+    <!-- JQuery -->
+    <script src="~/Scripts/User/js/jquery.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="~/Scripts/User/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/Scripts/User/js/script.js"></script>
+
+    <!-- Java-scripts ends-->
+</body>
+
+</html>

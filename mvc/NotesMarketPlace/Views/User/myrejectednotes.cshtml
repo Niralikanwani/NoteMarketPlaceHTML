@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My Rejected Notes - NotesMarketPlace</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/User/images/logo/favicon.ico">
+
+    <!-- GoogleFonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="~/Content/User/css/font-awesome/css/fontawesome.min.css">
+
+    <!-- FontAwesome link -->
+    <script src="https://kit.fontawesome.com/4fa77e6d3c.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="~/Content/User/css/bootstrap/bootstrap.min.css">
+
+    <!-- Customized css -->
+    <link rel="stylesheet" href="~/Content/User/css/style.css">
+
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="~/Content/User/css/responsive.css">
+
+</head>
+
+<body>
+    <section id="my-rejected-notes">
+
+        <!-- Header -->
+        <div class="only-white-nav extra-style-nav">
+            <header class="site-header">
+                <div class="header-wrapper">
+
+                    <!-- Mobile Menu Open Button -->
+                    <span id="mobile-nav-open-btn">&#9776;</span>
+
+                    <div class="logo-wrapper">
+                        <a href="~/User/home" title="Site Logo">
+                            <img src="~/Content/User/images/logo/dark-logo.png" alt="Logo">
+                        </a>
+                    </div>
+                    <div class="navigation-wrapper">
+                        <nav class="main-nav">
+                            <ul class="menu-navigation">
+                                <li>
+                                    <a href="~/User/searchnotes">Search Notes</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/addnote">Sell Your Notes</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/buyersrequests">Buyer Requests</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/faq">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/contactus">Contact Us</a>
+                                </li>
+                                <li class="logged-in-user-photo-li">
+                                    <div class="dropdown">
+                                        <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="logged-in-user-photo">
+                                                <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
+                                            </div>
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="~/User/userprofile">My Profile</a>
+                                            <a class="dropdown-item" href="~/User/mydownloads">My Downloads</a>
+                                            <a class="dropdown-item" href="~/User/mysoldnotes">My Sold Notes</a>
+                                            <a class="dropdown-item active" href="~/User/myrejected-notes">My Rejected Notes</a>
+                                            <a class="dropdown-item" href="~/User/changepassword">Change Password</a>
+                                            <a class="dropdown-item logout-btn-dropdown" href="~/User/login">Logout</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="btn btn-general btn-purple" href="login" title="Download" role="button">Logout</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <img class="logo-in-mobile-menu" src="~/Content/User/images/logo/dark-logo.png" alt="Notes Logo">
+                        <!-- Mobile Menu Close Button -->
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li>
+                                    <a href="~/User/search-notes">Search Notes</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/add-note">Sell Your Notes</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/buyers-requests">Buyer Requests</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/faq">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="~/User/contact-us" >Contact Us</a>
+                                </li>
+                                <li class=" logged-in-user-photo-li">
+                                    <div class="logged-in-user-photo">
+                                        <div class="dropdown">
+                                            <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src="~/Content/User/images/testimonial/customer-4.png" alt="User Photo" class="rounded-circle">
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="user-profile">My Profile</a>
+                                                <a class="dropdown-item" href="my-downloads">My Downloads</a>
+                                                <a class="dropdown-item" href="my-sold-notes">My Sold Notes</a>
+                                                <a class="dropdown-item active" href="my-rejected-notes">My Rejected Notes</a>
+                                                <a class="dropdown-item" href="change-password">Change Password</a>
+                                                <a class="dropdown-item logout-btn-dropdown" href="login">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="btn btn-general btn-purple" href="~/User/login" title="Download" role="button">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- Header ends -->
+        <!-- my downloads table -->
+        <div class="content-box-lg">
+
+            @{
+                IEnumerable<NotesMarketPlace.Models.Allnotes> RejectedNotes = ViewBag.rejectedNote;
+                int s = 0;
+
+            }
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-left box-heading-wrapper">
+                        <p class="my-downloads-heading">My Rejected Notes</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                        <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                            <div class="form-group has-search-bar">
+                                <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
+                            </div>
+
+                            <button class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+                <div class="my-downloads-table general-table-responsive">
+                    <div class="table-responsive-xl">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">sr no.</th>
+                                    <th scope="col">Note title</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">Remarks</th>
+                                    <th scope="col">Clone</th>
+                                    <th scope="col" width="80px">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in RejectedNotes)
+                                {
+                                    s++;
+
+                                    <tr>
+                                        <td>@s</td>
+                                        <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                        <td>@i.Category.CategoryName</td>
+                                        <td>@i.SellerNotes.AdminRemarks</td>
+                                        <td class="purple-td">Clone</td>
+                                        <td class="text-center visible-overflow-for-dropdown">
+                                            <div class="dropdown dropdown-dots-table">
+                                                <a href="~/User/#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="dots-in-table" src="~/Content/User/images/Dashboard/dots.png" alt="edit">
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="#">Download Note</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- progress note table -->
+        <!-- pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="" aria-label="Previous">
+                        <img src="~/Content/User/images/pagination/left-arrow.png" alt="">
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="" aria-label="Next">
+                        <img style="color: white;" src="~/Content/User/images/pagination/right-arrow.png" alt="">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- pagination -->
+        <!-- Footer  -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-8 col-12 text-left">
+                        <p>Copyright &copy; TatvaSoft All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 col-sm-4 col-12 text-right">
+                        <ul class="social-list">
+                            <li><a class="facebook-img" href="#"><img src="~/Content/User/images/Homepage/facebook.png" alt=""></a></li>
+                            <li><a class="twitter-img" href="#"><img src="~/Content/User/images/Homepage/twitter.png" alt=""></a></li>
+                            <li><a class="linkedin-img" href="#"><img src="~/Content/User/images/Homepage/linkedin.png" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Ends -->
+
+    </section>
+
+    <!-- Java-scripts -->
+    <!-- JQuery -->
+    <script src="~/Scripts/User/js/jquery.js"></script>
+
+    <!-- Production version -->
+    <!-- <script src="https://unpkg.com/@@popperjs/core@2"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="~/Scripts/User/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/Scripts/User/js/script.js"></script>
+
+
+
+    <!-- Java-scripts -->
+</body>
+
+</html>
