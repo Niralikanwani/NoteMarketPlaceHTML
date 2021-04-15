@@ -1,0 +1,324 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/Userheaderfooter.cshtml";
+}
+
+<head>
+
+
+
+    <!-- Title -->
+    <title>Dashboard - Notes MarketPlace</title>
+
+
+
+</head>
+
+<body>
+
+    <section id="dashboard">
+
+
+        <!-- Dashboard box -->
+        <div class="content-box-lg">
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">
+                        <p class="dashboard-heading">Dashboard</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
+                        <a href="~/User/addNote" class="btn btn-general btn-purple add-note-btn" role="button">Add Note</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row no-gutters">
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="row no-gutters my-earning-wrapper-left">
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="my-earning-heading dashboard-single-box">
+                                    <img src="~/Content/User/images/Dashboard/earning-icon.svg" alt="">
+                                    <p class="box-heading">My Earning</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="number-of-notes-sold dashboard-single-box">
+                                    <a href="~/User/mysoldnotes"><p class="dashboard-single-detail">@ViewBag.mySoldNotes</p></a>
+                                    <p class="dashboard-single-detail-inst">Number of Notes Sold</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="money-earned dashboard-single-box">
+                                    <a href="~/User/mysoldnotes"> <p class="dashboard-single-detail">$ @ViewBag.totalEarning</p></a>
+                                    <p class="dashboard-single-detail-inst">Money Earned</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 my-earning-wrapper-right">
+
+                        <div class="row no-gutters">
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="my-downloads dashboard-single-box">
+                                    <a href="~/User/mydownloads">
+                                        <p class="dashboard-single-detail">@ViewBag.myDownloadNotes</p>
+                                    </a>
+                                    <p class="dashboard-single-detail-inst">My Downloads</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="my-rejected-notes dashboard-single-box">
+                                    <a href="~/User/myrejectednotes">
+                                        <p class="dashboard-single-detail">@ViewBag.myRejectedNotes</p>
+                                    </a>
+                                    <p class="dashboard-single-detail-inst">My Rejected Notes</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="buyer-request dashboard-single-box">
+                                    <a href="~/User/buyersrequests">
+                                        <p class="dashboard-single-detail">@ViewBag.buyerRequests</p>
+                                    </a>
+                                    <p class="dashboard-single-detail-inst">Buyer Requests</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Dashboard box -->
+        <!-- progress note table -->
+        <div class="content-box-lg">
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-left box-heading-wrapper">
+                        <p class="box-heading">In Progress Notes</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                        <form name="f1">
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here..." name="searchnotes">
+                                </div>
+
+                                <button type="submit" name="submit" value="search1" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+                @{
+                    IPagedList<NotesMarketPlace.Models.DisplayNotes> Inprogerss = ViewBag.inProgressNotes;
+                }
+
+                <div class="in-progress-notes-table general-table-responsive">
+                    <div class="table-responsive-xl">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Added date</th>
+                                    <th scope="col">title</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col" class="text-center">action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.inProgressNotesCount > 0)
+                                {
+                                    foreach (var i in Inprogerss)
+                                    {
+                                        <tr>
+                                            <td>@i.SellerNotes.DateAdded</td>
+                                            <td>@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td>@i.status.Value</td>
+                                            @if (@i.status.Value == "Draft")
+                                            {
+                                                <td class="text-center">
+                                                    <a href="addnote/@i.SellerNotes.Id"><img class="edit-img-in-table" src="~/Content/User/images/Dashboard/edit.png" alt="edit"></a>
+                                                    <a href="deleteNote/@i.SellerNotes.Id"><img class="delete-img-in-table" src="~/Content/User/images/Dashboard/delete.png" alt="delete"></a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center">
+                                                    <a href="notedetail/@i.SellerNotes.Id"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="eye"></a>
+                                                </td>
+                                            }
+
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5">
+                                            <center>
+                                                No Record Found!
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- progress note table -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(Inprogerss, page => Url.Action("dashboard", new
+               {
+                   page,
+                   Search = Request.QueryString["searchnotes"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+
+
+        <!-- pagination -->
+        <!-- published note table -->
+        <div class="content-box-lg">
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-left box-heading-wrapper">
+                        <p class="box-heading">Published Notes</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                        <form name="f2">
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here..." name="searchnotes">
+                                </div>
+
+                                <button name="submit" type="submit" value="search2" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+                @{
+                    IPagedList<NotesMarketPlace.Models.DisplayNotes> published = ViewBag.publishedNote;
+                }
+
+                <div class="published-notes-table general-table-responsive">
+                    <div class="table-responsive-lg">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Added date</th>
+                                    <th scope="col">title</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">sell type</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col" class="text-center">action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.publishedNoteCount > 0)
+                                {
+                                    foreach (var i in published)
+                                    {
+                                        <tr>
+                                            <td>@i.SellerNotes.DateAdded</td>
+                                            <td>@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td>@i.SellerNotes.IsPaid</td>
+                                            <td>@i.SellerNotes.SellingPrice</td>
+                                            <td class="text-center"><img class="eye-img-in-table" src="~/Content/User/images/Dashboard/eye.png" alt="eye"></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6">
+                                            <center>
+                                                No Record Found !
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- published note table -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(published, page2 => Url.Action("dashboard", new
+               {
+                   page2,
+                   Search = Request.QueryString["searchnotes"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+
+
+        <!-- pagination -->
+
+
+    </section>
+
+
+
+
+</body>
+

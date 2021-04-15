@@ -1,0 +1,146 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+
+<head>
+
+    <title>Members | Notes-MarketPlace</title>
+
+
+</head>
+
+<body>
+    <section id="members" class="admin-manage-page">
+
+
+        <!-- manage-administrator table -->
+        <div class="content-box-lg">
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-12 text-left box-heading-wrapper">
+                        <p class="box-heading">Members</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-7 col-12">
+
+                        @using (Html.BeginForm("members", "Admin", FormMethod.Get))
+                        {
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/Admin/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" name="membersearch" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search">
+                                </div>
+
+                                <button type="submit" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @{
+            IPagedList<NotesMarketPlace.Models.tbl_Users> members = ViewBag.members;
+            int s = 0;
+        }
+
+        <div class="container">
+
+            <div class="members-table general-table-responsive">
+                <div class="table-responsive-xl">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">sr no.</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Joining Date</th>
+                                <th scope="col" class="text-center">Under Review<br>notes</th>
+                                <th scope="col" class="text-center">Published<br>notes</th>
+                                <th scope="col" class="text-center">Downloaded<br>notes</th>
+                                <th scope="col" class="text-center">Total<br>Expenses</th>
+                                <th scope="col" class="text-center">Total<br>Earnings</th>
+                                <th scope="col" class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @if (ViewBag.membersCount > 0)
+                            {
+                                foreach (var i in members)
+                                {
+                                    s++;
+                                    <tr>
+                                        <td class="text-center">@s</td>
+                                        <td>@i.FirstName</td>
+                                        <td>@i.LastName</td>
+                                        <td>@i.Email_id</td>
+                                        <td>@i.DateAdded</td>
+                                        <td class="purple-td text-center">@i.tbl_Notes1.Where(x => x.Seller_id == i.Id && x.Status == 4).Count()</td>
+                                        <td class="purple-td text-center">@i.tbl_Notes1.Where(x => x.Seller_id == i.Id && x.Status == 2).Count()</td>
+                                        <td class="purple-td text-center">@i.tbl_Download1.Where(x => x.Seller_id == i.Id && x.IsAttachmentDownloaded == true && x.AttachmentPath != null).Count()</td>
+                                        <td class="purple-td text-center">$@i.tbl_Download.Where(x => x.Downloader_id == i.Id && x.IsSellerHasAllowedDownload == true && x.AttachmentPath != null).Select(x => x.PurchasedPrice).Sum()</td>
+                                        <td class="text-center">$@i.tbl_Download1.Where(x => x.Seller_id == i.Id && x.IsSellerHasAllowedDownload == true && x.AttachmentPath != null).Select(x => x.PurchasedPrice).Sum()</td>
+                                        <td class="text-center visible-overflow-for-dropdown">
+                                            <div class="dropdown dropdown-dots-table">
+                                                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item" href="/Admin/memberdetails/@i.Id">View More Details</a>
+                                                    <a class="dropdown-item" href="/Admin/deactivateUser/@i.Id">Deactivate</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="11">
+                                        <center>
+                                            No Record Found...!
+                                        </center>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- published note table -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(members, page => Url.Action("members", new
+               {
+                   page,
+                   Search = Request.QueryString["membersearch"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+        <!-- Pagination -->
+
+    </section>
+
+</body>
+

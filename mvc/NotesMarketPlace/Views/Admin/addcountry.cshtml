@@ -1,0 +1,78 @@
+﻿@model NotesMarketPlace.Models.tbl_Country
+
+@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+
+<head>
+
+    <!-- Title -->
+    <title>Add Country | Notes-MarketPlace</title>
+
+</head>
+
+<body>
+
+    <!-- Add Country section -->
+    <section id="add-country" class="admin-add-page">
+
+
+        <!-- Add Country conatiner -->
+        <div class="general-box">
+            <div class="content-box-lg">
+
+                <!-- Section Heading -->
+                <div class="container">
+                    <div class="row">
+                        <p class="section-heading">Add Country</p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Add Country Form -->
+                        <form method="post">
+                            <div class="row">
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                                    <div class="form-group">
+
+                                        <label class="info-label" for="city">Country Name *</label>
+
+                                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control input-box-style", @id = "city", placeholder = "Enter country name" })
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="info-label" for="ccode">Country Code *</label>
+
+                                        @Html.TextBoxFor(x => x.CountryCode, new { @class = "form-control input-box-style", @id = "ccode", placeholder = "Enter country code" })
+
+                                    </div>
+
+                                    <div class="form-btn">
+
+                                        <button type="submit" class="btn btn-general btn-purple">Submit</button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Add Country container ends -->
+
+    </section>
+    <!-- Add Country section ends-->
+
+</body>
+

@@ -1,0 +1,103 @@
+﻿@model NotesMarketPlace.Models.MyProfileModel
+@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+
+<head>
+
+    <title>My Profile | Notes-MarketPlace</title>
+
+</head>
+
+<body>
+    <section id="my-profile" class="admin-add-page">
+
+
+        <!-- details conatiner -->
+        <div class="general-box">
+            <div class="content-box-lg">
+                <div class="container">
+                    <div class="row">
+                        <p class="section-heading">My Profile</p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <form method="post">
+                            <div class="row">
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="fname">First Name *</label>
+                                        @Html.TextBoxFor(x => x.FirstName, new { Value = @ViewBag.firstName, @class = "form-control input-box-style", @id = "fname", placeholder = "Enter your first name" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="lname">Last Name *</label>
+                                        @Html.TextBoxFor(x => x.LastName, new { Value = @ViewBag.lastName, @class = "form-control input-box-style", @id = "lname", placeholder = "Enter your last name" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="email">Email *</label>
+                                        @Html.TextBoxFor(x => x.Email_id, new { Value = @ViewBag.email, @class = "form-control input-box-style", @id = "email", placeholder = "Enter your email address" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="semail">Secondary Email</label>
+                                        @Html.TextBoxFor(x => x.SecondaryEmailAddress, new { @class = "form-control input-box-style", @id = "semail", placeholder = "Enter your email address" })
+
+                                    </div>
+
+                                    <div class="row no-gutters">
+
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                                            <div class="form-group">
+                                                <label class="info-label" for="ccode">Code</label>
+                                                @Html.DropDownListFor(x => x.CountryCode, new SelectList(ViewBag.countryCode, "Value", "Text"), "Select your country", new { @class = "form-control input-box-style", id = "ccode" })
+
+                                                <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/Admin/images/user-profile/down-arrow.png" alt="eye"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
+                                            <div class="form-group">
+                                                <label class="info-label" for="phn">Phone Number</label>
+                                                @Html.TextBoxFor(x => x.PhoneNumber, new { id = "phn", @class = "form-control input-box-style", placeholder = "Enter your phone number" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail1">Profile Picture</label>
+                                        <div onclick="document.getElementById('myprofile-picture').click()" id="uploadProfilePicture" class="form-control input-box-style upload-input-box" style="cursor:pointer;">
+
+                                            <img src="~/Content/Admin/images/user-profile/upload.png" alt="Upload Profile Picture">
+                                            <p>Upload a picture</p>
+                                        </div>
+                                    </div>
+                                    @Html.TextBoxFor(x => x.ProfilePicture, new { @class = "form-control input-box-style", style = "display:none;", @id = "myprofile-picture", type = "file", name = "myprofile-picture" })
+
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-general btn-purple">Submit</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- details container -->
+
+    </section>
+
+</body>
+

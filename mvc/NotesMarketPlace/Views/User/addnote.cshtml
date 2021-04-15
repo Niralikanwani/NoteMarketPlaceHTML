@@ -1,0 +1,338 @@
+﻿@model NotesMarketPlace.Models.NotesModel
+
+@{
+    Layout = "~/Views/Shared/Userheaderfooter.cshtml";
+}
+
+<head>
+
+    <!-- Title -->
+    <title>Add Notes | Notes-MarketPlace</title>
+
+</head>
+
+<body>
+
+    <!-- Add Note Section -->
+    <section id="add-note">
+
+
+        <!-- Heading -->
+        <div class="small-height-bg">
+            <p class="text-center">Add Notes</p>
+        </div>
+
+        <!-- Add Note Form -->
+        <form method="post" action="addnote" enctype="multipart/form-data">
+
+            <div class="general-box">
+                <div class="content-box-lg">
+
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">Basic Note Details</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail1">Title *</label>
+                                        @Html.TextBoxFor(x => x.NoteTitle, new { @class = "form-control input-box-style", @id = "title", @placeholder = "Enter your note title" })
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("NoteTitle", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleFormControlSelect1">Category *</label>
+                                        @Html.DropDownListFor(x => x.NoteCategory_id, new SelectList(ViewBag.notecategoies, "Value", "Text"), "Select Your category", new { @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                        <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("NoteCategory_id", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="uploadNoteDisplayPicture">Display Picture</label>
+                                        <div id="uploadNoteDisplayPicture" class="form-control input-box-style upload-input-box" onClick="document.getElementById('upload-display-picture').click()" style="cursor:pointer;">
+                                            <img src="~/Content/User/images/user-profile/upload.png" alt="Upload Profile Picture">
+                                            <p>Upload a picture</p>
+                                        </div>
+
+                                        @Html.TextBoxFor(x => x.DisplayPicture, new { @class = "form-control input-box-style", @id = "upload-display-picture", type = "file", style = "display:none", name = "upload-display-picture" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="uploadYourNotes">Upload Notes *</label>
+                                        <div id="uploadYourNotes" class="form-control input-box-style upload-input-box" onClick="document.getElementById('upload-note').click()" style="cursor:pointer;">
+                                            <img src="~/Content/User/images/add-note/upload-note.png" alt="Upload your notes">
+                                            <p>Upload your notes</p>
+                                        </div>
+
+                                        @Html.TextBoxFor(x => x.NoteAttachment, new { @class = "form-control input-box-style", @accept = "application/pdf", @multiple = "multiple", @id = "upload-note", type = "file", style = "display:none", name = "noteattachment" })
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("NoteAttachment", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleFormControlSelect2">Type</label>
+                                        @Html.DropDownListFor(x => x.NoteType_id, new SelectList(ViewBag.notetypes, "Value", "Text"), "Select your note type", new { @class = "form-control input-box-style", id = "exampleFormControlSelect2" })
+                                        <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("NoteTypeID", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="numberofpages">Number of Pages</label>
+
+                                        @Html.TextBoxFor(x => x.NumberOfPages, new { @class = "form-control input-box-style", @id = "numberofpages", @placeholder = "Enter number of note pages" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="info-label" for="note-desc-textarea">Description *</label>
+
+                                        @Html.TextAreaFor(x => x.Description, new { @class = "form-control input-box-style", @id = "note-desc-textarea", @placeholder = "Enter note description..." })
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("NoteDescription", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- details container -->
+            <!-- details conatiner -->
+            <div class="general-box">
+                <div class="content-box-lg">
+
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">Institution Information</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="addnotes-country">Country *</label>
+                                        @Html.DropDownListFor(x => x.Country_id, new SelectList(ViewBag.countries, "Value", "Text"), "Select your country", new { @class = "form-control input-box-style", id = "addnotes-country" })
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("CountryID", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+                                        <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="addnotes-institute">Institute Name</label>
+                                        @Html.TextBoxFor(x => x.University, new { @class = "form-control input-box-style", @id = "addnotes-institute", @placeholder = "Enter your institute name" })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- details container -->
+            <!-- details conatiner -->
+            <div class="general-box">
+                <div class="content-box-lg">
+
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">Course Details</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="addnotes-course">Course Name</label>
+                                        @Html.TextBoxFor(x => x.Course, new { @class = "form-control input-box-style", @id = "addnotes-course", @placeholder = "Enter your course name" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="addnotes-coursecode">Course Code</label>
+                                        @Html.TextBoxFor(x => x.CourseCode, new { @class = "form-control input-box-style", @id = "addnotes-coursecode", @placeholder = "Enter your course code" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="addnotes-professor">Professor / Lecturer</label>
+                                        @Html.TextBoxFor(x => x.Professor, new { @class = "form-control input-box-style", @id = "addnotes-professor", @placeholder = "Enter your Professor name" })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- details container -->
+            <!-- details conatiner -->
+            <div class="general-box">
+                <div class="content-box-lg">
+
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">Selling Information</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="">Sell For *</label>
+                                        <div class="row no-gutters free-paid-radio-wrapper">
+
+                                            <label class="purple-radio-input">
+
+                                                @Html.RadioButtonFor(m => m.IsPaid, "Free", new { @name = "radio"})
+
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="info-label" for="">Free</label>
+                                            <label class="purple-radio-input">
+
+                                                @Html.RadioButtonFor(m => m.IsPaid, "Paid", new { @name = "radio"})
+
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="info-label" for="">Paid</label>
+                                            <div class="incorrect-password-label">
+                                                <p>
+                                                    @Html.ValidationMessage("SellType", new { @style = "color:red" })
+                                                </p>
+                                            </div>
+
+                                            <!-- <input type="radio" class="form-control input-box-style" id="free-radio-input">
+                                    <label class="info-label" for="">Free</label>
+                                    <input type="radio" class="form-control input-box-style" id="paid-radio-input">
+                                    <label class="info-label" for="">Paid</label>                                             -->
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="addnotes-sellprice">Sell Price *</label>
+                                        @Html.TextBoxFor(x => x.SellingPrice, new { @class = "form-control input-box-style", @id = "addnotes-sellprice", @placeholder = "Enter your price" })
+                                        <div class="incorrect-password-label">
+                                            <p>
+                                                @Html.ValidationMessage("SellPrice", new { @style = "color:red" })
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="uploadNotePreviewPicture">Note Preview *</label>
+
+                                        <div id="uploadNotePreviewPicture" class="form-control input-box-style upload-input-box" onClick="document.getElementById('upload-note-preview').click()" style="cursor:pointer;">
+                                            <img src="~/Content/User/images/user-profile/upload.png" alt="Upload Profile Picture">
+                                            <p>Upload a picture</p>
+                                        </div>
+
+                                        @Html.TextBoxFor(x => x.NotesPreview, new { @class = "form-control input-box-style", @id = "upload-note-preview", type = "file", style = "display:none", name = "upload-note-preview" })
+
+                                        <div class="incorrect-password-label">
+                                            @if (@ViewBag.previewmessage != null)
+                                            {
+                                                <p class="text-danger">@ViewBag.previewmessage</p>
+                                            }
+                                            @Html.ValidationMessage("PreviewUpload", new { @style = "color:red" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row no-gutters">
+                                        <div class="form-btn">
+                                            <button type="submit" class="btn btn-general btn-purple save-note-btn">Save</button>
+                                        </div>
+
+                                        <div class="form-btn">
+                                            <button type="submit" onclick="Confirm()" class="btn btn-general btn-purple publish-note-btn">Publish</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+
+        </section>
+
+
+    </body>
+
+

@@ -1,0 +1,239 @@
+﻿@model  NotesMarketPlace.Models.NotesModel
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/Userheaderfooter.cshtml";
+}
+<head>
+
+    <title>Search Notes - NotesMarketPlace</title>
+
+    <script>
+        function searchNote() {
+
+            document.getElementById("searchForm").submit();
+
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <section id="search-notes">
+
+
+        <!-- background -->
+        <div class="small-height-bg">
+            <p class="text-center">Search Notes</p>
+        </div>
+        <!-- background -->
+        <!-- general box -->
+        <div class="general-box">
+            <div class="content-box-lg">
+                @using (Html.BeginForm("searchnotes", "User", FormMethod.Get, new { @Id = "searchForm" }))
+                {
+                    <div class="container">
+                        <div class="row">
+                            <p class="box-heading">Search and Filter Notes</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="search-notes-input-box">
+
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/User/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" name="search" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search notes here...">
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-2 col-sm-4 padding-right-0">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(x => x.NoteType_id, new SelectList(ViewBag.notetypes, "Value", "Text"), "Select Your Type", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+
+                                            <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-4 padding-right-0">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(x => x.NoteCategory_id, new SelectList(ViewBag.notecategoies, "Value", "Text"), "Select Your category", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-4 padding-right-0">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(x => x.University, new SelectList(ViewBag.universities, "Value", "Text"), "Select Your University", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-4 padding-right-0">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(x => x.Course, new SelectList(ViewBag.courses, "Value", "Text"), "Select Your Course", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-4 padding-right-0">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(x => x.Country_id, new SelectList(ViewBag.countries, "Value", "Text"), "Select Your Country", new { @onchange = "searchNote()", @class = "form-control input-box-style", id = "exampleFormControlSelect1" })
+                                            <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(x => x.rating, new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="Select month", Value = "select" },
+                                            new SelectListItem{ Text="1 star", Value = "1" },
+                                            new SelectListItem{ Text="2 star", Value = "2" },
+                                            new SelectListItem{ Text="3 star", Value = "3" },
+                                            new SelectListItem{ Text="4 star", Value = "4" },
+                                            new SelectListItem{ Text="5 star", Value = "5" },
+
+                                           }, new { @class = "form-control input-box-style", id = "rate", @onchange = "searchNote()" })
+                                            <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- general-box -->
+
+        <!-- general box -->
+        <div class="general-box searched-notes-box">
+            <div class="content-box-lg">
+                @{
+                    IPagedList<NotesMarketPlace.Models.DisplayNotes> seachedNote = ViewBag.filterNotes;
+
+                }
+                <div class="container">
+                    <div class="row">
+                        <p class="box-heading">Total @ViewBag.nd Notes</p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+
+
+
+                        @foreach (var i in seachedNote)
+                        {
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+
+                                <div class="note-details-box">
+                                    <img src="@Url.Content(@i.SellerNotes.DisplayPicture)" alt="">
+                                    <div class="note-details">
+                                        <a href="/User/notedetail/@i.SellerNotes.Id">
+                                            <p class="note-name-title"> @i.SellerNotes.NoteTitle </p>
+                                        </a>
+                                        <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/university.png" alt=""></span>@i.SellerNotes.University, @i.country.Name</p>
+                                        <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/pages.png" alt=""></span>@i.SellerNotes.NumberOfPages Pages</p>
+                                        <p class="note-info-with-icon"><span><img src="~/Content/User/images/Search/date.png" alt=""></span>@i.SellerNotes.PublishedDate</p>
+                                        <p class="note-info-with-icon red-text"><span><img src="~/Content/User/images/Search/flag.png" alt=""></span>@i.SellerNotes.tbl_ReportedNotes.Where(x => x.Note_id == i.SellerNotes.Id).Count() Users marked this note as inappropriate</p>
+
+                                        <div class="notes-rating">
+                                            <div class="col-md-7 col-sm-8 col-8">
+                                                <div class="rate">
+
+                                                    @{
+                                                        var ratCount = i.SellerNotes.tbl_NoteReviews.Where(x => x.Note_id == i.SellerNotes.Id).Select(x => x.Ratings).Count();
+                                                        var ratSum = i.SellerNotes.tbl_NoteReviews.Where(x => x.Note_id== i.SellerNotes.Id).Select(x => x.Ratings).Sum();
+                                                    }
+
+                                                    @if (ratCount > 0)
+                                                    {
+
+                                                        for (int j = 1; j <= Math.Round(ratSum / ratCount); j++)
+                                                        {
+                                                            <i class="text-warning fa fa-star"></i>
+                                                        }
+                                                        for (int j = 1; j <= 5 - Math.Round(ratSum / ratCount); j++)
+                                                        {
+                                                            <i class="text-muted fa fa-star"></i>
+                                                        }
+                                                    }
+                                                    @if (ratCount == 0)
+                                                    {
+                                                        for (int j = 1; j <= 5; j++)
+                                                        {
+                                                            <i class="text-muted fa fa-star"></i>
+                                                        }
+                                                    }
+
+                                                    @*<input type="radio" id="star5" name="rate" value="5" />
+                                                        <label for="star5" title="text">5 stars</label>
+                                                        <input type="radio" id="star4" name="rate" value="4" />
+                                                        <label for="star4" title="text">4 stars</label>
+                                                        <input type="radio" id="star3" name="rate" value="3" />
+                                                        <label for="star3" title="text">3 stars</label>
+                                                        <input type="radio" id="star2" name="rate" value="2" />
+                                                        <label for="star2" title="text">2 stars</label>
+                                                        <input type="radio" id="star1" name="rate" value="1" />
+                                                        <label for="star1" title="text">1 star</label>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-4 col-4">
+                                                <p class="review-count">@ratCount reviews</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        }
+
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- general box -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(seachedNote, page => Url.Action("searchnotes", new
+               {
+                   page,
+                  // Search = Request.QueryString["searchnotes"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+
+        <!-- pagination -->
+
+
+    </section>
+
+
+</body>
+
+

@@ -1,0 +1,197 @@
+﻿@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+
+<head>
+
+    <title>Note Details - Notes MarketPlace</title>
+
+
+</head>
+
+<body>
+    <section id="note-detail">
+
+
+        <!-- Thanks popup -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <img src="~/Content/Admin/images/notes-detail/close.png" alt="">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="thank-img text-center">
+                            <img src="~/Content/Admin/images/notes-detail/SUCCESS.png" alt="">
+                        </div>
+                        <p class="thank-heading">Thank you for purchasing!</p>
+                        <p class="dear-buyer-name">Dear Smith,</p>
+                        <p>As this is paid notes - you need to pay to seller Rahil Shah offline. We will send him an emial that you want to download this note. He may contact you further for payment process completion.</p>
+                        <p>In case, you have urgency,<br>Please contact us on +919658745692.</p>
+                        <p>Once he receives the payment and acknowledgde us - selected notes you can see over my downloads tab for download.</p>
+                        <p>Have a good day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Thanks popup -->
+        <!-- Notes details -->
+        <div class="container">
+            <div class="content-box-lg with-bottom-border">
+                <p class="box-heading">Notes Details</p>
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 note-details-left">
+                        <div class="row no-gutters">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6"><img class="note-img-full img-fluid" src="~/Content/Admin/images/notes-detail/1.jpg" alt=""></div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="note-desc-box">
+                                    <p class="note-name">Computer Science</p>
+                                    <p class="note-type-genre">Sciences</p>
+                                    <p class="note-desc">Lorem ipsum Rem et nihil maiores animi, consectetur facere assumenda necessitatibus eaque fugit explicabo quas sed vero. Consequatur minima provident voluptates.</p>
+                                    <a href="#" class="btn btn-general btn-purple" data-toggle="modal" data-target="#exampleModal">Download / $15</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 note-details-right">
+                        <div class="row no-gutters">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="note-details-left-part">
+                                    <p class="note-single-detail-tag">Institution:</p>
+                                    <p class="note-single-detail-tag">Country:</p>
+                                    <p class="note-single-detail-tag">Course Name:</p>
+                                    <p class="note-single-detail-tag">Course Code:</p>
+                                    <p class="note-single-detail-tag">Professor:</p>
+                                    <p class="note-single-detail-tag">Number of Pages :</p>
+                                    <p class="note-single-detail-tag">Approved Date:</p>
+                                    <p class="note-single-detail-tag">Rating :</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="note-details-right-part">
+                                    <p class="note-single-detail">University of California</p>
+                                    <p class="note-single-detail">United State</p>
+                                    <p class="note-single-detail">Computer Engineering</p>
+                                    <p class="note-single-detail">248705</p>
+                                    <p class="note-single-detail">Mr.Richard Brown</p>
+                                    <p class="note-single-detail">277</p>
+                                    <p class="note-single-detail">November 25 2020</p>
+                                    <p class="note-single-detail">
+                                        <span>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </span>100 Reviews
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="red-text">5 Users marked this note as inappropriate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Notes details -->
+        <!-- preview and reviwes -->
+        <div class="container">
+            <div class="content-box-lg">
+                <div class="row no-gutters">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+                        <div class="notes-preview-box">
+                            <p class="box-heading">Notes Preview</p>
+                            <iframe src="~/Content/Admin/file/TS_SRS_Notes_marketplace.pdf"></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-12">
+                        <div class="customer-review-box">
+                            <p class="box-heading">Customer Reviews</p>
+
+                            <div class="customer-review-tiles">
+
+                                <div class="customer-review-tile">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-2 col-md-3 col-sm-2 col-12">
+                                            <img class="reviewer-photo" src="~/Content/Admin/images/testimonial/customer-1.png" alt="">
+                                        </div>
+                                        <div class="col-lg-10 col-md-9 col-sm-10 col-12">
+                                            <p class="reviewer-name">Richard Brown</p>
+                                            <p class="reviewer-rating">
+                                                <span>
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star-white.png" alt="star">
+                                                </span>
+                                            </p>
+                                            <p class="reviewer-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat harum deleniti asperiores!</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="customer-review-tile-border-bottom"></div>
+
+                                <div class="customer-review-tile">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-2 col-md-3 col-sm-2 col-12">
+                                            <img class="reviewer-photo" src="~/Content/Admin/images/testimonial/customer-2.png" alt="">
+                                        </div>
+                                        <div class="col-lg-10 col-md-9 col-sm-10 col-12">
+                                            <p class="reviewer-name">Alice Ortiaz</p>
+                                            <p class="reviewer-rating">
+                                                <span>
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star-white.png" alt="star">
+                                                </span>
+                                            </p>
+                                            <p class="reviewer-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat harum deleniti asperiores!</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="customer-review-tile-border-bottom"></div>
+
+                                <div class="customer-review-tile">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-2 col-md-3 col-sm-2 col-12">
+                                            <img class="reviewer-photo" src="~/Content/Admin/images/testimonial/customer-3.png" alt="">
+                                        </div>
+                                        <div class="col-lg-10 col-md-9 col-sm-10 col-12">
+                                            <p class="reviewer-name">Sara Passmore</p>
+                                            <p class="reviewer-rating">
+                                                <span>
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star.png" alt="star">
+                                                    <img src="~/Content/Admin/images/notes-detail/star-white.png" alt="star">
+                                                </span>
+                                            </p>
+                                            <p class="reviewer-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat harum deleniti asperiores!</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- preview and revies -->
+
+
+    </section>
+
+</body>
+

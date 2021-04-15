@@ -1,0 +1,258 @@
+﻿@model NotesMarketPlace.Models.NotesModel
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+<head>
+    
+    <!-- Title-->
+    <title>Dashboard | Notes-MarketPlace</title>
+
+    <script>
+        function searchByMonth() {
+
+            document.getElementById("searchForm").submit();
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <section id="dashboard">
+
+
+        @{
+            IPagedList<NotesMarketPlace.Models.DisplayNotes> pndetail = ViewBag.publishednotes;
+            int s = 0;
+
+        }
+        @foreach (var i in pndetail)
+        {
+            <div class="modal fade" id="exampleModal_@i.SellerNotes.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <img src="~/Content/Admin/images/notes-detail/close.png" alt="">
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <p class="note-name-reject-popup">@i.SellerNotes.NoteTitle</p>
+
+                            @using (Html.BeginForm("unpublishNote", "Admin", FormMethod.Get))
+                            {
+                                <div class="form-group">
+                                    <label class="info-label" for="comment-questions">Remark *</label>
+                                    @Html.Hidden("id", "", new { Value = i.SellerNotes.Id, @class = "hiddenid" })
+                                    <textarea class="form-control input-box-style" id="" required placeholder="Write remarks" style="resize:none;" name="adminRemarks"></textarea>
+                                </div>
+
+                                <div class="reject-popup-btns">
+                                    <div class="row no-gutters">
+                                        <button type="submit" class="btn action-btn-in-table" id="reject-btn" onclick="return confirm('Are you sure you want to Unpublish this note?');">Unpublish</button>
+                                        <button class="btn action-btn-in-table" id="cancel-btn">Cancel</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Modal -->
+        <!-- Dashboard box -->
+        <div class="content-box-lg">
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-left">
+                        <p class="dashboard-heading">Dashboard</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row no-gutters">
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="notes-in-review-for-publish dashboard-single-box">
+                            <p class="dashboard-single-detail">@ViewBag.NoteUnderReview</p>
+                            <p class="dashboard-single-detail-inst">Numbers of Notes in Review for Publish</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="new-notes-downloaded dashboard-single-box">
+                            <p class="dashboard-single-detail">@ViewBag.LastDownLoadedNote </p>
+                            <p class="dashboard-single-detail-inst">Numbers of New Notes Downloaded (Last 7 days)</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="new-registration dashboard-single-box">
+                            <p class="dashboard-single-detail">@ViewBag.LastRegisteredUsers</p>
+                            <p class="dashboard-single-detail-inst">Numbers of New Registrations (Last 7 days)</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Dashboard box -->
+        <!-- published note table -->
+        <div class="content-box-lg">
+
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-left box-heading-wrapper">
+                        <p class="box-heading">Published Notes</p>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+
+                        @using (Html.BeginForm("dashboard", "Admin", FormMethod.Get, new { @Id = "searchForm" }))
+                        {
+                            <div class="row no-gutters general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/Admin/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search" name="dashsearch">
+                                </div>
+
+                                <button type="submit" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+
+                                <div class="form-group">
+                                    @Html.DropDownListFor(x => x.Month, new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="Select month", Value = "select" },
+                                            new SelectListItem{ Text="January", Value = "1" },
+                                            new SelectListItem{ Text="February", Value = "2" },
+                                            new SelectListItem{ Text="March", Value = "3" },
+                                            new SelectListItem{ Text="April", Value = "4" },
+                                            new SelectListItem{ Text="May", Value = "5" },
+                                            new SelectListItem{ Text="June", Value = "6" },
+                                            new SelectListItem{ Text="July", Value = "7" },
+                                            new SelectListItem{ Text="August", Value = "8" },
+                                            new SelectListItem{ Text="September", Value = "9" },
+                                            new SelectListItem{ Text="October", Value = "10" },
+                                            new SelectListItem{ Text="November", Value = "11" },
+                                            new SelectListItem{ Text="December", Value = "12" },
+                                           }, new { @class = "form-control input-box-style", id = "dashMonth", @onchange = "searchByMonth()" })
+                                    <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/Admin/images/Dashboard/down-arrow.png" alt="eye"></div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+                <div class="dashboard-published-notes-table general-table-responsive">
+                    <div class="table-responsive-xl">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">sr no.</th>
+                                    <th scope="col">title</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">Attachment Size</th>
+                                    <th scope="col">Sell type</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">publisher</th>
+                                    <th scope="col">published date</th>
+                                    <th scope="col" class="text-center">Number of<br>downloads</th>
+                                    <th scope="col" width="80px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.publishednotesCount > 0)
+                                {
+                                    foreach (var i in pndetail)
+                                    {
+
+                                        s++;
+
+
+                                        <tr>
+                                            <td>@s</td>
+                                            <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center">@i.SellerNotes.IsPaid</td>
+                                            <td>$@i.SellerNotes.SellingPrice</td>
+                                            <td>@i.user.FirstName @i.user.LastName</td>
+                                            <td>@i.SellerNotes.PublishedDate</td>
+                                            <td class="purple-td text-center">@i.SellerNotes.tbl_Download.Where(x => x.Note_id == i.SellerNotes.Id && x.IsAttachmentDownloaded == true && x.AttachmentPath != null).Count()</td>
+                                            <td class="text-center visible-overflow-for-dropdown">
+                                                <div class="dropdown dropdown-dots-table">
+                                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
+                                                    </a>
+
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item" href="/Admin/adminDownloadNote/@i.SellerNotes.Id">Download Note</a>
+                                                        <a class="dropdown-item" href="/User/notedetail/@i.SellerNotes.Id">View More Details</a>
+                                                        <a class="dropdown-item" data-id="@i.SellerNotes.Id" data-toggle="modal" data-target="#exampleModal_@i.SellerNotes.Id" onclick="document.getElementByClass('hiddenid').value =@i.SellerNotes.Id">Unpublish</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="10">
+                                            <center>
+                                                No Record Found...!
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- published note table -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(pndetail, page => Url.Action("dashboard", new
+               {
+                   page,
+                   Search = Request.QueryString["dashsearch"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+
+
+        <!-- pagination -->
+
+
+    </section>
+
+</body>
+
+

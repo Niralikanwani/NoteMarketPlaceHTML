@@ -1,0 +1,241 @@
+﻿@model NotesMarketPlace.Models.Userprofile
+
+
+@{
+    Layout = "~/Views/Shared/Userheaderfooter.cshtml";
+}
+
+<head>
+
+    <title>User Profile - Notes MarketPlace</title>
+
+
+</head>
+
+<body>
+    <section id="user-profile">
+
+        <!-- background -->
+        <div class="small-height-bg">
+            <p class="text-center">User Profile</p>
+        </div>
+        <!-- background -->
+        <!-- details conatiner -->
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="general-box">
+                <div class="content-box-lg">
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">Basic Profile Details</p>
+                        </div>
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="fname">First Name *</label>
+                                        @Html.TextBoxFor(x => x.FirstName, new { id = "fname", @class = "form-control input-box-style", placeholder = "Enter your First name" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="lname">Last Name *</label>
+                                        @Html.TextBoxFor(x => x.LastName, new { id = "lname", @class = "form-control input-box-style", placeholder = "Enter your Last name" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="email">Email *</label>
+                                        @Html.TextBoxFor(x => x.Email_id, new { id = "email", @class = "form-control input-box-style", placeholder = "Enter your Email" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="dob">Date Of Birth</label>
+                                        @Html.TextBoxFor(x => x.DOB, new { id = "dob", @class = "form-control input-box-style", placeholder = "Enter your Date of birth" })
+
+                                        <div class="calendar"><img class="calendar-img" src="~/Content/User/images/user-profile/calendar.png" alt="eye"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="gender">Gender</label>
+                                        @Html.DropDownListFor(x => x.Gender, new List<SelectListItem>
+                                          {
+                                       new SelectListItem{ Text="Select Gender", @Value = "" ,Selected=true, Disabled = true },
+                                            new SelectListItem{ Text="Male", Value = "male" },
+                                              new SelectListItem{ Text="Female", Value = "female" },
+
+                                           }, new { @class = "form-control input-box-style", id = "gender" })
+
+
+                                        <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleFormControlSelect1">Code</label>
+                                        @Html.DropDownListFor(x => x.PhoneCountryCode, new SelectList(ViewBag.countryCode, "Value", "Text"), "Select Code", new { @class = "form-control input-box-style", id = "addnotes-country" })
+
+                                        <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label class="info-label" for="phn">Phone Number</label>
+                                        @Html.TextBoxFor(x => x.PhoneNumber, new { @name = "PhoneNumber", id = "phn", @class = "form-control input-box-style", placeholder = "Enter your phone number" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="dp">Profile Picture</label>
+                                        <div id="uploadProfilePicture" onclick="document.getElementById('dp').click()" class="form-control input-box-style upload-input-box">
+                                            @Html.TextBoxFor(x => x.ProfilePicture, new { @class = "form-control input-box-style", style = "display:none;", @id = "dp", type = "file", name = "dp" })
+                                            <img src="~/Content/User/images/user-profile/upload.png" alt="Upload Profile Picture">
+                                            <p>Upload a picture</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- details container -->
+            <!-- details conatiner -->
+            <div class="general-box">
+                <div class="content-box-lg">
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">Address Details</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="address1">Address Line 1 *</label>
+                                        @Html.TextBoxFor(x => x.AddressLine1, new { @name = "AddressLine1", id = "address1", @class = "form-control input-box-style", placeholder = "Enter your Address" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail1">Address Line 2</label>
+                                        @Html.TextBoxFor(x => x.AddressLine2, new { @name = "AddressLine2", id = "address1", @class = "form-control input-box-style", placeholder = "Enter your Address" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="city">City *</label>
+                                        @Html.TextBoxFor(x => x.City, new { @name = "City", id = "city", @class = "form-control input-box-style", placeholder = "Enter your city" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="state">State *</label>
+                                        @Html.TextBoxFor(x => x.State, new { @name = "State", id = "city", @class = "form-control input-box-style", placeholder = "Enter your state" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="zipcode">ZipCode *</label>
+                                        @Html.TextBoxFor(x => x.ZipCode, new { @name = "ZipCode", id = "zipcode", @class = "form-control input-box-style", placeholder = "Enter your Zip Code" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleFormControlSelect1">Country *</label>
+                                        @Html.DropDownListFor(x => x.Country, new SelectList(ViewBag.countries, "Value", "Text"), "Select your country", new { @class = "form-control input-box-style", id = "addnotes-country" })
+
+                                        <div class="select-down-arrow"><img class="select-down-arrow-img" src="~/Content/User/images/user-profile/down-arrow.png" alt="eye"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- details container -->
+            <!-- details conatiner -->
+            <div class="general-box">
+                <div class="content-box-lg">
+                    <div class="container">
+                        <div class="row">
+                            <p class="section-heading">University and College Information</p>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="university">University</label>
+                                        @Html.TextBoxFor(x => x.University, new { @name = "University", id = "university", @class = "form-control input-box-style", placeholder = "Enter your university" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="info-label" for="clg">College</label>
+                                        @Html.TextBoxFor(x => x.College, new { @name = "College", id = "clg", @class = "form-control input-box-style", placeholder = "Enter your College" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-general btn-purple">Submit</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- details container -->
+        </form>
+    </section>
+
+</body>
+
+

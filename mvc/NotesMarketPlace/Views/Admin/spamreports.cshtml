@@ -1,0 +1,142 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+
+<head>
+
+    <title>Spam Reports - Notes MarketPlace</title>
+
+</head>
+
+<body>
+    <section id="spam-reports" class="admin-manage-page">
+
+        <!-- manage-administrator table -->
+        <div class="content-box-lg">
+            @{
+                IPagedList<NotesMarketPlace.Models.DisplayNotes> spams = ViewBag.spams;
+                int s = 0;
+            }
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-12 text-left box-heading-wrapper">
+                        <p class="box-heading">Spam Reports</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-7 col-12">
+                        @using (Html.BeginForm("spamreports", "Admin", FormMethod.Get))
+                        {
+                            <div class="row no-gutters text-right general-search-bar-btn-wrapper">
+                                <div class="form-group has-search-bar">
+                                    <span class="search-symbol"><img src="~/Content/Admin/images/Dashboard/search-icon.png" alt=""></span>
+                                    <input name="spamsearch" type="text" class="form-control input-box-style search-notes-bar" id="example" placeholder="Search">
+                                </div>
+
+                                <button type="submit" class="btn btn-general btn-purple general-search-bar-btn">Search</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+                <div class="spam-reports-table general-table-responsive">
+                    <div class="table-responsive-xl">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">sr no.</th>
+                                    <th scope="col">Reported by</th>
+                                    <th scope="col">Note title</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Date Edited</th>
+                                    <th scope="col">Remark</th>
+                                    <th scope="col" class="text-center">Action</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (ViewBag.spamsCount > 0)
+                                {
+
+                                    foreach (var i in spams)
+                                    {
+                                        s++;
+
+                                        <tr>
+                                            <td class="text-center">@s</td>
+                                            <td>@i.user.FirstName @i.user.LastName</td>
+                                            <td class="purple-td">@i.SellerNotes.NoteTitle</td>
+                                            <td>@i.Category.CategoryName</td>
+                                            <td>@i.spam.DateEdited</td>
+                                            <td>@i.spam.Remarks</td>
+                                            <td class="text-center">
+                                                <img class="delete-img-in-table" src="~/Content/Admin/images/Dashboard/delete.png" alt="edit">
+                                            </td>
+                                            <td class="text-center visible-overflow-for-dropdown">
+                                                <div class="dropdown dropdown-dots-table">
+                                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img class="dots-in-table" src="~/Content/Admin/images/Dashboard/dots.png" alt="edit">
+                                                    </a>
+
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item" href="/Admin/adminDownloadNote/@i.SellerNotes.Id">Download Note</a>
+                                                        <a class="dropdown-item" href="/User/notedetail/@i.SellerNotes.Id">View More Details</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">
+                                            <center>
+                                                No Record Found...!
+                                            </center>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- published note table -->
+        <!-- Pagination -->
+        <div class="pagination-section">
+            <div class="pagination-notes">
+                <div class="pagination-number">
+                    @Html.PagedListPager(spams, page => Url.Action("spamreports", new
+               {
+                   page,
+                   Search = Request.QueryString["spamsearch"]
+                   // SortOrder = Request.QueryString["SortOrder"]
+               })
+           , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, MaximumPageNumbersToDisplay = 5 }
+           )
+                </div>
+            </div>
+        </div>
+
+
+        <!-- pagination -->
+
+
+    </section>
+
+</body>
+
+

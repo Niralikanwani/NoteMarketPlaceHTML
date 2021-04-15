@@ -1,0 +1,99 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    Layout = "~/Views/Shared/Adminheaderfooter.cshtml";
+}
+
+<head>
+
+    <title>Manage System Configuration - Notes MarketPlace</title>
+
+</head>
+
+<body>
+    <section id="manage-system-configuration" class="admin-add-page">
+
+
+        <!-- details conatiner -->
+        <div class="general-box">
+            <div class="content-box-lg">
+                <div class="container">
+                    <div class="row">
+                        <p class="section-heading">Manage System Configuration</p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <form>
+                            <div class="row">
+
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail1">Support email address *</label>
+                                        <input type="email" class="form-control input-box-style" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter support email address">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail2">Support phone number *</label>
+                                        <input type="tel" class="form-control input-box-style" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter your first name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail3">Email Address(es) (for various events system will send notifications to these users) *</label>
+                                        <input type="email" class="form-control input-box-style" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="Enter email address">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail4">Facebook URL</label>
+                                        <input type="text" class="form-control input-box-style" id="exampleInputEmail4" aria-describedby="emailHelp" placeholder="Enter facebook url">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail5">Twitter URL</label>
+                                        <input type="text" class="form-control input-box-style" id="exampleInputEmail5" aria-describedby="emailHelp" placeholder="Enter twitter url">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="exampleInputEmail6">Linkedin URL</label>
+                                        <input type="text" class="form-control input-box-style" id="exampleInputEmail6" aria-describedby="emailHelp" placeholder="Enter linkedin url">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="defualtbookimage1">Default image for notes (if seller do not upload)</label>
+                                        <div id="defualtbookimage1" class="form-control input-box-style upload-input-box" onClick="document.getElementById('defaultimage1').click()" style="cursor: pointer;">
+                                            <img src="~/Content/Admin/images/user-profile/upload.png" alt="Upload Picture">
+                                            <p>Upload a picture</p>
+                                            <input type="file" id="defaultimage1" name="defaultimage1" style="display:none;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="info-label" for="defualtbookimage2">Default profile picture (if seller do not upload)</label>
+                                        <div id="defualtbookimage2" class="form-control input-box-style upload-input-box" onClick="document.getElementById('defaultimage2').click()" style="cursor: pointer;">
+                                            <img src="~/Content/Admin/images/user-profile/upload.png" alt="Upload Picture">
+                                            <p>Upload a picture</p>
+                                            <input type="file" id="defaultimage2" name="defaultimage2" style="display:none;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-general btn-purple">Submit</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- details container -->
+
+
+    </section>
+
+</body>
+

@@ -1,0 +1,101 @@
+﻿@model NotesMarketPlace.Models.Contactus
+
+@{
+    Layout = "~/Views/Shared/Userheaderfooter.cshtml";
+}
+
+
+
+<head>
+
+    <title>Contact Us - NotesMarketPlace</title>
+
+
+</head>
+
+<body>
+    <section id="contact-us">
+
+
+        <!-- background -->
+        <div class="small-height-bg">
+            <p class="text-center">Contact Us</p>
+        </div>
+        <!-- background -->
+        <!-- general box -->
+        <div class="general-box">
+            <div class="content-box-lg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="section-heading">Get in Touch</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <form method="post">
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label class="info-label" for="cu-fullname">Full Name *</label>
+                                    @if (Session["Emailid"] != null)
+                                    {
+                                        @Html.TextBoxFor(x => x.FullName, new { @Value = @Session["FullName"].ToString(), @class = "form-control form-inbox", id = "cu-fullname", placeholder = "Enter your full name", @readonly = "readonly" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(x => x.FullName, new { @class = "form-control form-inbox", id = "cu-fullname", placeholder = "Enter your full name" })
+                                    }
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="info-label" for="cu-email">Email Address *</label>
+                                    @if (Session["Emaiid"] != null)
+                                    {
+                                        @Html.TextBoxFor(x => x.Email_id, new { @Value = @Session["EmailID"].ToString(), @class = "form-control form-inbox", id = "cu-email", placeholder = "Enter your email address", @readonly = "readonly" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(x => x.Email_id, new { @class = "form-control form-inbox", id = "cu-email", placeholder = "Enter your email address" })
+                                    }
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="info-label" for="form-subject">Subject *</label>
+                                    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control form-inbox", id = "form-subject", placeholder = "Enter your subject" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label class="info-label" for="comment-questions">Comments / Questions *</label>
+                                    @Html.TextAreaFor(x => x.Question, new { @class = "form-control form-inbox", id = "comment-questions", placeholder = "Comments...", style = "resize:none;", rows = "12" })
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-btn">
+                                    <button type="submit" class="btn btn-general btn-purple">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- general box -->
+
+
+    </section>
+
+
+</body>
+
