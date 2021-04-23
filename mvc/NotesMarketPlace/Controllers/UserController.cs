@@ -370,7 +370,20 @@ namespace NotesMarketPlace.Controllers
                 ViewBag.publishedNote = PublishedNoted.ToPagedList(page2 ?? 1, 5);
                 ViewBag.publishedNoteCount = PublishedNoted.Count();
 
+                if (Session["Userid"] != null)
+                {
+                    int usid = (int)Session["Userid"];
+                    var dp = DBobj.tbl_UserProfile.Where(x => x.Id == usid).Select(x => x.ProfilePicture).FirstOrDefault();
+                    if (dp != null)
+                    {
+                        Session["profile"] = dp;
+                    }
+                    else
+                    {
+                        Session["profile"] = "/Content/User/images/testimonial/customer-1.png";
+                    }
 
+                }
 
                 return View();
             }
@@ -420,7 +433,7 @@ namespace NotesMarketPlace.Controllers
                     }
                     if (submit == "Publish")
                     {
-                        nd.Status = 4;
+                        nd.Status = 8;
                         nd.DateEdited = DateTime.Now;
                     }
                     nd.NoteTitle = notedetails.NoteTitle;
@@ -503,6 +516,7 @@ namespace NotesMarketPlace.Controllers
                         sna.IsActive = true;
                         sna.DateAdded = DateTime.Now;
                         sna.AddedBy = (int)Session["Userid"];
+                    nm.tbl_NoteAttachments.Add(sna);
                         nm.SaveChanges();
 
                     }
@@ -533,8 +547,8 @@ namespace NotesMarketPlace.Controllers
         //Get 
         public ActionResult searchnotes(int? page, string search, string NoteType_id, string NoteCategory_id, string University, string Country_id, string Course, decimal? rating)
         {
-            using (NoteMarketPlaceEntities nm = new NoteMarketPlaceEntities())
-            {
+            NoteMarketPlaceEntities nm = new NoteMarketPlaceEntities();
+            
 
                 var notecategory = nm.tbl_NoteCategory.Distinct().ToList();
                 var notetype = nm.tbl_NoteType.Distinct().ToList();
@@ -575,14 +589,22 @@ namespace NotesMarketPlace.Controllers
                 if (Session["Userid"] != null)
                 {
                     int usid = (int)Session["Userid"];
-                    var dp = nm.tbl_UserProfile.Where(x => x.User_id == usid).Select(x => x.ProfilePicture).FirstOrDefault();
-                    Session["dp"] = dp;
+                    var dp = nm.tbl_UserProfile.Where(x => x.Id == usid).Select(x => x.ProfilePicture).FirstOrDefault();
+                    if (dp != null)
+                    {
+                        Session["profile"] = dp;
+                    }
+                    else
+                    {
+                        Session["profile"] = "/Content/User/images/testimonial/customer-1.png";
+                    }
+
                 }
 
 
 
                 return View();
-            }
+            
 
         }
 
@@ -861,7 +883,7 @@ namespace NotesMarketPlace.Controllers
                 int id = (int)Session["Userid"];
                 var user = nm.tbl_Users.Where(x => x.Id == id).FirstOrDefault();
                 tbl_UserProfile userprofiles = nm.tbl_UserProfile.Where(x => x.User_id == id).FirstOrDefault();
-                Userprofile upd = new Userprofile();
+                MyProfileModel upd = new MyProfileModel();
 
                 var countryname = nm.tbl_Country.ToList();
                 ViewBag.countries = new SelectList(countryname, "Id", "Name");
@@ -887,10 +909,26 @@ namespace NotesMarketPlace.Controllers
 
 
                     }
-                    //Session["dp"] = userprofiles.ProfilePicture;
+                    if (userprofiles != null)
+                    {
+                        Session["profile"] = userprofiles.ProfilePicture;
+                    }
+                    else
+                    {
+                        Session["profile"] = "/Content/User/images/testimonial/customer-1.png";
+                    }
+                    
                     return View(upd);
                 }
-                //Session["dp"] = userprofiles.ProfilePicture;
+                if (nm.tbl_UserProfile.Where(x => x.Id == id).Count() > 0)
+                {
+                    Session["profile"] = userprofiles.ProfilePicture;
+                }
+                else
+                {
+                    Session["profile"] = "/Content/User/images/testimonial/customer-1.png";
+                }
+                
                 return View();
             }
 
@@ -906,9 +944,9 @@ namespace NotesMarketPlace.Controllers
                     {
                         int id = (int)Session["Userid"];
                         var countryname = nm.tbl_Country.ToList();
-                        ViewBag.countries = new SelectList(countryname, "CountryID", "CountryName");
+                        ViewBag.countries = new SelectList(countryname, "Id", "Name");
                         var countrycode = nm.tbl_Country.ToList();
-                        ViewBag.countryCode = new SelectList(countrycode, "CountryID", "CountryCode");
+                        ViewBag.countryCode = new SelectList(countrycode, "Id", "CountryCode");
                         tbl_Users u = nm.tbl_Users.Where(x => x.Id == id).FirstOrDefault();
                         u.FirstName = upd.FirstName;
                         u.LastName = upd.LastName;
@@ -923,10 +961,10 @@ namespace NotesMarketPlace.Controllers
                             profile.User_id = (int)Session["Userid"];
                             profile.State = upd.State;
                             profile.Country = upd.Country;
-                            profile.PhoneCountryCode = upd.CountryCode;
+                            profile.PhoneCountryCode = upd.PhoneCountryCode;
                             profile.AddressLine1 = upd.AddressLine1;
                             profile.AddressLine2 = upd.AddressLine2;
-                            profile.DOB = upd.DateOfBirth;
+                            profile.DOB = upd.DOB;
                             profile.Gender = upd.Gender;
                             
                             profile.University = upd.University;
@@ -942,7 +980,7 @@ namespace NotesMarketPlace.Controllers
 
 
                         nm.SaveChanges();
-                            string path = Path.Combine(Server.MapPath("~/Member/" + Session["Userid"].ToString()));
+                            string path = Path.Combine(Server.MapPath("/Member/" + Session["Userid"].ToString()));
 
                             if (!Directory.Exists(path))
                             {
@@ -957,7 +995,7 @@ namespace NotesMarketPlace.Controllers
                                 string finalpath = Path.Combine(path, fileName);
                                 upd.ProfilePicture.SaveAs(finalpath);
 
-                                profile.ProfilePicture = Path.Combine(("~/Member/" + Session["Userid"].ToString()), fileName);
+                                profile.ProfilePicture = Path.Combine(("/Member/" + Session["Userid"].ToString()), fileName);
                                 nm.SaveChanges();
                             }
 
@@ -969,10 +1007,11 @@ namespace NotesMarketPlace.Controllers
                             profile.User_id = (int)Session["Userid"];
                             profile.State = upd.State;
                             profile.Country = upd.Country;
-                            profile.PhoneCountryCode = upd.CountryCode;
+                            profile.PhoneCountryCode = upd.PhoneCountryCode;
+;
                             profile.AddressLine1 = upd.AddressLine1;
                             profile.AddressLine2 = upd.AddressLine2;
-                            profile.DOB = upd.DateOfBirth;
+                            profile.DOB = upd.DOB;
                             profile.Gender = upd.Gender;
                             profile.University = upd.University;
                             profile.ZipCode = upd.ZipCode;
@@ -986,7 +1025,7 @@ namespace NotesMarketPlace.Controllers
                             profile.EditedBy = (int)Session["Userid"];
                             nm.tbl_UserProfile.Add(profile);
                             nm.SaveChanges();
-                            string path = Path.Combine(Server.MapPath("~/Member/" + Session["Userid"].ToString()));
+                            string path = Path.Combine(Server.MapPath("/Member/" + Session["Userid"].ToString()));
 
                             if (!Directory.Exists(path))
                             {
@@ -1001,7 +1040,7 @@ namespace NotesMarketPlace.Controllers
                                 string finalpath = Path.Combine(path, fileName);
                                 upd.ProfilePicture.SaveAs(finalpath);
 
-                                profile.ProfilePicture = Path.Combine(("~/Member/" + Session["Userid"].ToString()), fileName);
+                                profile.ProfilePicture = Path.Combine(("/Member/" + Session["Userid"].ToString()), fileName);
                                 nm.SaveChanges();
                             }
 

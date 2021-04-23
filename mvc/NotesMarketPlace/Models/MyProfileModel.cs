@@ -19,7 +19,7 @@ namespace NotesMarketPlace.Models
         public int Gender { get; set; }
         public string SecondaryEmailAddress { get; set; }
         [Required(ErrorMessage = "Please Select Country  Code")]
-        public string CountryCode { get; set; }
+        public string PhoneCountryCode { get; set; }
         [Required(ErrorMessage = "Please Select Country ")]
         public int Country { get; set; }
         [Required(ErrorMessage = "Please enter your phone number")]
@@ -29,7 +29,7 @@ namespace NotesMarketPlace.Models
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
 
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
 
         [Required(ErrorMessage = "Please enter your city")]
 

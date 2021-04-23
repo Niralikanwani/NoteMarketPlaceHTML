@@ -534,7 +534,7 @@ namespace NotesMarketPlace.Controllers
 
                     profile.User_id = (int)Session["Userid"];
                     profile.State = "NULL";
-                    profile.PhoneCountryCode = upd.CountryCode;
+                    profile.PhoneCountryCode = upd.PhoneCountryCode;
                     profile.Country = 1;
                     profile.AddressLine1 = "NULL";
                     profile.DateEdited = DateTime.Now;
@@ -572,7 +572,7 @@ namespace NotesMarketPlace.Controllers
 
                     profile.User_id = (int)Session["Userid"];
                     profile.State = null;
-                    profile.PhoneCountryCode = upd.CountryCode;
+                    profile.PhoneCountryCode = upd.PhoneCountryCode;
                     profile.Country = 1;
                     profile.AddressLine1 = "NULL";
                     profile.DateEdited = DateTime.Now;
@@ -619,7 +619,7 @@ namespace NotesMarketPlace.Controllers
         {
             using (NoteMarketPlaceEntities DBobj = new NoteMarketPlaceEntities())
             {
-                var adminnotesunderreview = (from n in DBobj.tbl_Notes.Where(x => (x.Status == 4 || x.Status == 5) && (x.NoteTitle.StartsWith(nursearch) || nursearch == null)).ToList()
+                var adminnotesunderreview = (from n in DBobj.tbl_Notes.Where(x => (x.Status == 8 || x.Status == 7) && (x.NoteTitle.StartsWith(nursearch) || nursearch == null)).ToList()
                                              join cat in DBobj.tbl_NoteCategory.ToList() on n.NoteCategory_id equals cat.Id
                                              join usr in DBobj.tbl_Users.ToList() on n.Seller_id equals usr.Id
                                              where (usr.FirstName == FirstName || String.IsNullOrEmpty(FirstName))
